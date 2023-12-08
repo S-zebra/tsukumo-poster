@@ -62,13 +62,13 @@ class MainWindow extends JFrame implements KeyListener {
     getRootPane().add(bottomPanel);
     setAlwaysOnTop(true);
     setTitle("TsukumoPoster");
-  }
-  
-  public static void main(String[] args) {
-    MainWindow mw = new MainWindow();
-    mw.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mw.askForLogin();
-    mw.setVisible(true);
+    
+//    JMenuBar menuBar=new JMenuBar();
+//    JMenu fileMenu = new JMenu("File");
+//    JMenuItem newItem = new JMenuItem("New...");
+//    fileMenu.add(newItem);
+//    menuBar.add(fileMenu);
+//    setJMenuBar(menuBar);
   }
   
   public void askForLogin() {
@@ -92,6 +92,7 @@ class MainWindow extends JFrame implements KeyListener {
       processWindowEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
     this.token = token;
+//    new LocateMePlugin();
   }
   
   @Override
@@ -130,6 +131,7 @@ class MainWindow extends JFrame implements KeyListener {
           return;
         }
         String[] lines = text.split("\n");
+        
         new Thread(new Runnable() {
           
           boolean sendLine(String text) {
@@ -139,7 +141,7 @@ class MainWindow extends JFrame implements KeyListener {
               SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                  statusLabel.setText("Posts: " + postCount);
+                  statusLabel.setText("投稿数: " + postCount);
                 }
               });
               return true;
@@ -172,7 +174,17 @@ class MainWindow extends JFrame implements KeyListener {
   }
   
 }
-
+class Loader{
+  public static void main(String[] args) {
+    System.setProperty("apple.laf.useScreenMenuBar", "true");
+    System.setProperty("apple.awt.application.name", "TsukumoPoster");
+    MainWindow mw = new MainWindow();
+    mw.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mw.askForLogin();
+    mw.setVisible(true);
+    
+  }
+}
 class TsukumoPoster {
   private double lat, lon;
   private Connection conn;
